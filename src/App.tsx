@@ -6,13 +6,14 @@ import { Services } from './components/Services'
 import { OurWorkPage } from './components/OurWorkPage'
 import { AboutUsPage } from './components/AboutUsPage'
 import { ContactUsPage } from './components/ContactUsPage'
+import { LocationsPage } from './components/LocationsPage'
 import { Footer } from './components/Footer'
 import { AnimatedCityscape } from './components/AnimatedCityscape'
 import { SplashScreen } from './components/SplashScreen'
 import './App.css'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'our-work' | 'about-us' | 'contact'>('home')
+  const [currentPage, setCurrentPage] = useState<'home' | 'our-work' | 'about-us' | 'locations' | 'contact'>('home')
 
   useEffect(() => {
     const handleHash = () => {
@@ -29,6 +30,15 @@ function App() {
         setCurrentPage('about-us')
       } else if (hash === 'contact') {
         setCurrentPage('contact')
+      } else if (hash === 'locations') {
+        setCurrentPage('locations')
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else if (hash === 'process') {
+        setCurrentPage('home')
+        setTimeout(() => {
+          const el = document.getElementById('process')
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 100)
       } else if (hash === 'home' || hash === '') {
         setCurrentPage('home')
       }
@@ -51,6 +61,17 @@ function App() {
       setCurrentPage('contact')
       window.location.hash = 'contact'
       window.scrollTo(0, 0)
+    } else if (page === 'locations') {
+      setCurrentPage('locations')
+      window.location.hash = 'locations'
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else if (page === 'process') {
+      setCurrentPage('home')
+      window.location.hash = 'process'
+      setTimeout(() => {
+        const el = document.getElementById('process')
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
     } else if (page === 'services') {
       setCurrentPage('our-work')
       window.location.hash = 'services'
@@ -75,6 +96,8 @@ function App() {
           <OurWorkPage />
         ) : currentPage === 'about-us' ? (
           <AboutUsPage onPageChange={handlePageChange} />
+        ) : currentPage === 'locations' ? (
+          <LocationsPage onPageChange={handlePageChange} />
         ) : currentPage === 'contact' ? (
           <ContactUsPage onPageChange={handlePageChange} />
         ) : (

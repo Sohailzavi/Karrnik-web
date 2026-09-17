@@ -133,6 +133,19 @@ export function Services() {
 
   return (
     <section className="services-section" id="services" aria-labelledby="services-heading">
+      {/* 3-Image Gallery Banner Showcase */}
+      <div className="services-gallery-banner" aria-label="Karnik Care Showcase">
+        <div className="gallery-banner-card">
+          <img src="/gallery-1.png" alt="State of the art facility" />
+        </div>
+        <div className="gallery-banner-card">
+          <img src="/gallery-2.png" alt="Expert technicians" />
+        </div>
+        <div className="gallery-banner-card">
+          <img src="/gallery-3.png" alt="Paint protection film detailing" />
+        </div>
+      </div>
+
       <div className="services-header">
         <div className="services-header-right">
           <h2 id="services-heading" className="services-title">
@@ -167,20 +180,18 @@ export function Services() {
                   className={`category-arrow-btn ${isOpen ? 'active' : ''}`}
                   aria-label={`Toggle ${category.title} services`}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+                  <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.1" />
                     <path
-                      d="M10 8L14 12L10 16"
+                      d="M7.5 12H16.5M12.5 8L16.5 12L12.5 16"
                       stroke="currentColor"
-                      strokeWidth="1.5"
+                      strokeWidth="1.2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
                   </svg>
                 </button>
               </div>
-
-              <div className="category-divider" />
 
               {isOpen && (
                 <div className={`service-cards-grid layout-${category.layoutType}`}>

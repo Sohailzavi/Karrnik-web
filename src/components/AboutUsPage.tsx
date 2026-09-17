@@ -57,7 +57,7 @@ export function AboutUsPage({ onPageChange }: AboutUsPageProps) {
               tintOpacity={0}
               blur={0}
               textColor="#ffffff"
-              lineColor="#dda91e"
+              lineColor="rgba(255, 255, 255, 0.3)"
               baseColor="transparent"
               intensity={1.2}
               shineSize={36}
@@ -168,7 +168,7 @@ export function AboutUsPage({ onPageChange }: AboutUsPageProps) {
             tintOpacity={0}
             blur={0}
             textColor="#ffffff"
-            lineColor="#dda91e"
+            lineColor="rgba(255, 255, 255, 0.3)"
             baseColor="transparent"
             intensity={1.2}
             shineSize={36}
