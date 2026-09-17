@@ -1,13 +1,44 @@
+import { useState, useRef, useCallback } from 'react'
 import SpecularButton from './SpecularButton'
 
 interface HeroProps {
   onPageChange?: (page: string) => void
 }
 
+const MASK_RADIUS = 160
+
 export function Hero({ onPageChange }: HeroProps) {
+  const [pos, setPos] = useState({ x: 0, y: 0 })
+  const [hovered, setHovered] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = containerRef.current?.getBoundingClientRect()
+    if (!rect) return
+    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+  }, [])
+
+  const maskStyle = hovered
+    ? {
+        WebkitMaskImage: `radial-gradient(circle ${MASK_RADIUS}px at ${pos.x}px ${pos.y}px, black 45%, transparent 100%)`,
+        maskImage: `radial-gradient(circle ${MASK_RADIUS}px at ${pos.x}px ${pos.y}px, black 45%, transparent 100%)`,
+        opacity: 1,
+      }
+    : {
+        WebkitMaskImage: "radial-gradient(circle 0px at 50% 50%, black 0%, transparent 0%)",
+        maskImage: "radial-gradient(circle 0px at 50% 50%, black 0%, transparent 0%)",
+        opacity: 0,
+      }
+
   return (
     <section className="hero-section" id="home" aria-label="Hero Showcase">
-      <div className="hero-card">
+      <div 
+        ref={containerRef}
+        className="hero-card"
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         {/* Porsche Carrera Image Background & Fade Overlay */}
         <div className="hero-car-wrapper" aria-hidden="true">
           <img
@@ -16,12 +47,18 @@ export function Hero({ onPageChange }: HeroProps) {
             className="hero-car-img hero-car-base"
             decoding="sync"
             fetchPriority="high"
+            draggable={false}
           />
           <img
             src="/car-glow.png"
             alt="Porsche Carrera Glowing Detail"
             className="hero-car-img hero-car-glow"
             decoding="sync"
+            style={{
+              ...maskStyle,
+              transition: hovered ? "none" : "mask-image 0.3s ease, -webkit-mask-image 0.3s ease, opacity 0.3s ease",
+            }}
+            draggable={false}
           />
           <div className="hero-car-mask" />
         </div>

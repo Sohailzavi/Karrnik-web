@@ -158,19 +158,7 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  opacity: 0;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
-}
-
-.hero-card:hover .hero-car-glow,
-.hero-car-wrapper:hover .hero-car-glow {
-  opacity: 1;
-}
-
-.hero-card:hover .hero-car-img,
-.hero-car-wrapper:hover .hero-car-img {
-  transform: scale(1.025);
 }
 
 .hero-car-mask {
@@ -1449,7 +1437,7 @@
 
 /* Services Section */
 .services-section {
-  padding: 6rem 6vw;
+  padding: 2rem 6vw 6rem 6vw;
   background: #080808;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
@@ -3154,7 +3142,7 @@
   grid-template-columns: repeat(3, 1fr);
   align-items: flex-start;
   gap: 1.8rem;
-  padding: 4rem 4vw 2rem 4vw;
+  padding: 1rem 4vw 2rem 4vw;
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
@@ -3625,7 +3613,7 @@
   .services-gallery-banner {
     grid-template-columns: 1fr;
     gap: 1.8rem;
-    padding: 2rem 4vw;
+    padding: 1rem 4vw;
   }
 }
 
