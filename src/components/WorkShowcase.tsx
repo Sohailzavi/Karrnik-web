@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 const showcaseItems = [
   {
@@ -24,96 +24,174 @@ const showcaseItems = [
 ]
 
 export function WorkShowcase() {
-  // stepIndex: 0 = "WORK THAT SPEAKS FOR ITSELF" text card, 1..4 = showcase images
   const [stepIndex, setStepIndex] = useState(0)
-  const [isFading, setIsFading] = useState(false)
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const stepIndexRef = useRef(stepIndex)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const lastScrollTime = useRef<number>(0)
+  const touchStartY = useRef<number>(0)
 
-  const advanceStep = (targetStep?: number) => {
-    if (isFading) return
-    setIsFading(true)
-    setTimeout(() => {
-      setStepIndex((prev) => {
-        if (targetStep !== undefined) return targetStep
-        return (prev + 1) % (showcaseItems.length + 1)
-      })
-      setIsFading(false)
-    }, 250)
-  }
-
-  // Auto-play interval (3.2 seconds)
+  // Keep ref updated to avoid stale state in event listeners
   useEffect(() => {
-    timerRef.current = setInterval(() => {
-      advanceStep()
-    }, 3200)
+    stepIndexRef.current = stepIndex
+  }, [stepIndex])
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const handleWheelNative = (e: WheelEvent) => {
+      const rect = el.getBoundingClientRect()
+      // Section is active if any part is visible in viewport
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+
+      if (!isVisible) return
+
+      const isScrollingDown = e.deltaY > 5
+      const isScrollingUp = e.deltaY < -5
+
+      if (isScrollingDown) {
+        if (stepIndexRef.current < showcaseItems.length) {
+          e.preventDefault()
+          const targetY = window.pageYOffset + rect.top
+          if (Math.abs(rect.top) > 2) {
+            window.scrollTo({ top: targetY, behavior: 'auto' })
+          }
+
+          const now = Date.now()
+          if (now - lastScrollTime.current > 380) {
+            lastScrollTime.current = now
+            setStepIndex((prev) => Math.min(prev + 1, showcaseItems.length))
+          }
+        }
+      } else if (isScrollingUp) {
+        if (stepIndexRef.current > 0) {
+          e.preventDefault()
+          const targetY = window.pageYOffset + rect.top
+          if (Math.abs(rect.top) > 2) {
+            window.scrollTo({ top: targetY, behavior: 'auto' })
+          }
+
+          const now = Date.now()
+          if (now - lastScrollTime.current > 380) {
+            lastScrollTime.current = now
+            setStepIndex((prev) => Math.max(prev - 1, 0))
+          }
+        }
+      }
+    }
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const rect = el.getBoundingClientRect()
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+      if (!isVisible) return
+
+      const deltaY = touchStartY.current - e.touches[0].clientY
+      if (Math.abs(deltaY) > 15) {
+        if (deltaY > 0 && stepIndexRef.current < showcaseItems.length) {
+          e.preventDefault()
+          const targetY = window.pageYOffset + rect.top
+          if (Math.abs(rect.top) > 2) {
+            window.scrollTo({ top: targetY, behavior: 'auto' })
+          }
+          const now = Date.now()
+          if (now - lastScrollTime.current > 380) {
+            lastScrollTime.current = now
+            setStepIndex((prev) => Math.min(prev + 1, showcaseItems.length))
+          }
+        } else if (deltaY < 0 && stepIndexRef.current > 0) {
+          e.preventDefault()
+          const targetY = window.pageYOffset + rect.top
+          if (Math.abs(rect.top) > 2) {
+            window.scrollTo({ top: targetY, behavior: 'auto' })
+          }
+          const now = Date.now()
+          if (now - lastScrollTime.current > 380) {
+            lastScrollTime.current = now
+            setStepIndex((prev) => Math.max(prev - 1, 0))
+          }
+        }
+      }
+    }
+
+    el.addEventListener('wheel', handleWheelNative, { passive: false })
+    el.addEventListener('touchstart', handleTouchStart, { passive: true })
+    el.addEventListener('touchmove', handleTouchMove, { passive: false })
 
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current)
+      el.removeEventListener('wheel', handleWheelNative)
+      el.removeEventListener('touchstart', handleTouchStart)
+      el.removeEventListener('touchmove', handleTouchMove)
     }
-  }, [stepIndex, isFading])
+  }, [])
 
   const handleCardClick = () => {
-    if (timerRef.current) clearInterval(timerRef.current)
-    advanceStep()
+    setStepIndex((prev) => (prev + 1) % (showcaseItems.length + 1))
   }
-
-  const handleDotClick = (e: React.MouseEvent, index: number) => {
-    e.stopPropagation()
-    if (timerRef.current) clearInterval(timerRef.current)
-    advanceStep(index)
-  }
-
-  const activeItem = stepIndex > 0 ? showcaseItems[stepIndex - 1] : null
 
   return (
-    <div className="work-showcase-container">
+    <div className="work-showcase-container" ref={containerRef} id="our-work">
       <div
         className="work-showcase-single-card"
         onClick={handleCardClick}
         role="button"
         tabIndex={0}
-        aria-label="Work showcase gallery"
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            handleCardClick()
-          }
-        }}
+        aria-label="Full screen work showcase gallery"
       >
-        {stepIndex === 0 ? (
-          <div className={`work-card-content ${isFading ? 'fading-out-left' : 'fade-in-left'}`}>
+        {/* Step 0: Full Screen Title Statement */}
+        <div className={`work-card-content ${stepIndex === 0 ? 'active-step' : 'step-hidden-left'}`}>
+          <div className="work-title-wrapper">
             <h3 className="work-card-title">
               WORK THAT
               <br />
               SPEAKS FOR ITSELF.
             </h3>
+            <p className="work-scroll-hint">
+              <span>Scroll down or tap to explore</span>
+              <span className="scroll-hint-arrow">&darr;</span>
+            </p>
           </div>
-        ) : (
-          <div className="work-showcase-image-frame">
-            <img
-              key={activeItem?.id}
-              src={activeItem?.image}
-              alt={activeItem?.title}
-              className={`work-showcase-img ${isFading ? 'fading-out-left' : 'fade-in-left'}`}
-            />
-          </div>
-        )}
+        </div>
 
-        {/* Indicator dots */}
+        {/* Steps 1 to N: Images sliding and fading left */}
+        {showcaseItems.map((item, idx) => {
+          const itemStep = idx + 1
+          let animClass = 'step-hidden-right'
+          if (stepIndex === itemStep) {
+            animClass = 'active-step'
+          } else if (stepIndex > itemStep) {
+            animClass = 'step-hidden-left'
+          }
+
+          return (
+            <div key={item.id} className={`work-showcase-image-frame ${animClass}`}>
+              <img
+                src={item.image}
+                alt={item.title}
+                className="work-showcase-img"
+              />
+              <div className="work-showcase-overlay">
+                <div className="work-item-details">
+                  <h4 className="work-item-title">{item.title}</h4>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+
+        {/* Floating Step Indicator Dots */}
         <div className="work-showcase-dots">
-          <button
-            type="button"
-            className={`showcase-dot ${stepIndex === 0 ? 'active' : ''}`}
-            onClick={(e) => handleDotClick(e, 0)}
-            aria-label="Title slide"
-          />
-          {showcaseItems.map((item, idx) => (
-            <button
-              key={item.id}
-              type="button"
-              className={`showcase-dot ${stepIndex === idx + 1 ? 'active' : ''}`}
-              onClick={(e) => handleDotClick(e, idx + 1)}
-              aria-label={`View ${item.title}`}
+          {[0, 1, 2, 3, 4].map((dotIdx) => (
+            <span
+              key={dotIdx}
+              className={`dot ${stepIndex === dotIdx ? 'active-pill' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation()
+                setStepIndex(dotIdx)
+              }}
             />
           ))}
         </div>

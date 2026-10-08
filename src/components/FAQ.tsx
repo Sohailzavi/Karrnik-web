@@ -9,9 +9,9 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     id: '1',
-    question: 'What services does Karnik provide?',
+    question: 'What services does Karrnik provide?',
     answer:
-      'Karnik offers car wash, interior and exterior detailing, ceramic coating, PPF, graphene coating, polishing, window tinting, car wrapping, alloy and tyre upgrades, audio and lighting upgrades, denting and painting, AC service, and periodic maintenance.',
+      'Karrnik offers car wash, interior and exterior detailing, ceramic coating, PPF, graphene coating, polishing, window tinting, car wrapping, alloy and tyre upgrades, audio and lighting upgrades, denting and painting, AC service, and periodic maintenance.',
   },
   {
     id: '2',
@@ -35,9 +35,9 @@ const faqData: FAQItem[] = [
   },
   {
     id: '6',
-    question: 'Where is Karnik located?',
+    question: 'Where is Karrnik located?',
     answer:
-      'Karnik Precision Studio is located at Kompally and Kondapur, Hyderabad. Contact us for precise location details and turn-by-turn guidance.',
+      'Karrnik Precision Studio is located at Kompally and Kondapur, Hyderabad. Contact us for precise location details and turn-by-turn guidance.',
   },
 ]
 
@@ -57,7 +57,7 @@ export function FAQ() {
             <br />
             <span className="gold-text">questions</span>
           </h2>
-          <p className="faq-subtitle">Everything you need to know before bringing your car to Karnik.</p>
+          <p className="faq-subtitle">Everything you need to know before bringing your car to Karrnik.</p>
         </div>
 
         <div className="faq-list">

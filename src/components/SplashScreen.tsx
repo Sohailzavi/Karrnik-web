@@ -66,8 +66,11 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         </div>
       </div>
 
-      <div className="splash-brand-logo">
-        <span className="splash-brand-text">KARNIK</span>
+      <div className="splash-brand-logo" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img src="/logo.png" alt="Karrnik Logo" width="48" height="48" style={{ objectFit: 'contain' }} />
+          <span className="splash-brand-text">KARRNIK</span>
+        </div>
         <span className="splash-brand-sub">PREMIUM AUTOMOTIVE CARE</span>
       </div>
     </div>

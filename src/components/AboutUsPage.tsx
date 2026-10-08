@@ -30,7 +30,7 @@ export function AboutUsPage({ onPageChange }: AboutUsPageProps) {
         <div className="about-hero-bg">
           <img 
             src="/about-us-hero.png" 
-            alt="KARNIK Facility & Workshop" 
+            alt="KARRNIK Facility & Workshop" 
             className="about-hero-img" 
           />
         </div>
@@ -57,7 +57,7 @@ export function AboutUsPage({ onPageChange }: AboutUsPageProps) {
               tintOpacity={0}
               blur={0}
               textColor="#ffffff"
-              lineColor="#dda91e"
+              lineColor="rgba(255, 255, 255, 0.3)"
               baseColor="transparent"
               intensity={1.2}
               shineSize={36}
@@ -69,7 +69,7 @@ export function AboutUsPage({ onPageChange }: AboutUsPageProps) {
               autoAnimate
               onClick={handleAppClick}
             >
-              Open Karnik App
+              Open Karrnik App
             </SpecularButton>
           </div>
         </div>
@@ -156,7 +156,7 @@ export function AboutUsPage({ onPageChange }: AboutUsPageProps) {
       <section className="about-destination-section">
         <div className="destination-container">
           <p className="destination-text">
-            Karnik is your destination for premium automotive care, protection,
+            Karrnik is your destination for premium automotive care, protection,
             customization, and maintenance &mdash; bringing professional service and
             attention to detail together under one standard.
           </p>
@@ -168,7 +168,7 @@ export function AboutUsPage({ onPageChange }: AboutUsPageProps) {
             tintOpacity={0}
             blur={0}
             textColor="#ffffff"
-            lineColor="#dda91e"
+            lineColor="rgba(255, 255, 255, 0.3)"
             baseColor="transparent"
             intensity={1.2}
             shineSize={36}
@@ -180,7 +180,7 @@ export function AboutUsPage({ onPageChange }: AboutUsPageProps) {
             autoAnimate
             onClick={handleServicesClick}
           >
-            Discover Karnik &rarr;
+            Discover Karrnik &rarr;
           </SpecularButton>
         </div>
       </section>

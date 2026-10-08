@@ -17,6 +17,7 @@ export interface SpecularButtonProps {
   followMouse?: boolean
   proximity?: number
   autoAnimate?: boolean
+  revolving?: boolean
   onClick?: (e: React.MouseEvent<any>) => void
   children?: React.ReactNode
   className?: string
@@ -39,6 +40,7 @@ export function SpecularButton({
   followMouse = true,
   proximity = 360,
   autoAnimate = true,
+  revolving = false,
   onClick,
   children,
   className = '',
@@ -114,7 +116,13 @@ export function SpecularButton({
         '--blur': `${blur}px`,
       } as React.CSSProperties}
     >
-      <span className="specular-button-border" aria-hidden="true" />
+      {revolving ? (
+        <span className="specular-revolving-border-wrap" aria-hidden="true">
+          <span className="specular-revolving-beam" />
+        </span>
+      ) : (
+        <span className="specular-button-border" aria-hidden="true" />
+      )}
       <span className="specular-button-bg" aria-hidden="true" />
       <span className="specular-button-shine" aria-hidden="true" />
       <span className="specular-button-content">{children}</span>

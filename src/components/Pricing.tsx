@@ -8,7 +8,6 @@ interface PricingPlan {
   buttonIcon?: string
   isHighlighted?: boolean
   features: string[]
-  badges?: string[]
 }
 
 const pricingPlans: PricingPlan[] = [
@@ -19,7 +18,6 @@ const pricingPlans: PricingPlan[] = [
     price: '₹4,999',
     unit: '/ package',
     buttonText: 'Grab',
-    buttonIcon: '🔑',
     features: [
       'Exterior Detailing',
       'Interior Detailing',
@@ -35,8 +33,6 @@ const pricingPlans: PricingPlan[] = [
     unit: '/ package',
     isHighlighted: true,
     buttonText: 'Grab',
-    buttonIcon: '🔑',
-    badges: ['Drive Confident 24/7', 'Advanced Care • Always On', '+ Premium Protection', 'Longer Shine'],
     features: [
       'Paint Preparation',
       'Ceramic Coating',
@@ -51,7 +47,6 @@ const pricingPlans: PricingPlan[] = [
     price: 'Custom Quote',
     unit: '/ Vehicle',
     buttonText: 'Contact',
-    buttonIcon: '🔑',
     features: [
       'Paint Protection Film (PPF)',
       'Ceramic Coating',
@@ -90,8 +85,16 @@ export function Pricing() {
               )}
               {plan.id === 'ceramic-protection' && (
                 <div className="icon-box sun-cloud-icon">
-                  <span className="cloud-symbol">☁</span>
-                  <span className="sun-symbol">☀</span>
+                  <svg width="58" height="42" viewBox="0 0 60 42" fill="none">
+                    <circle cx="40" cy="14" r="12" fill="#F59E0B" />
+                    <path d="M18 34h26a10 10 0 002-19.8 13 13 0 00-24.8-3.4A10 10 0 0018 34z" fill="url(#cloudGrad)" />
+                    <defs>
+                      <linearGradient id="cloudGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#E5E7EB" />
+                        <stop offset="100%" stopColor="#9CA3AF" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </div>
               )}
               {plan.id === 'protection-plus' && (
@@ -115,7 +118,9 @@ export function Pricing() {
             </div>
 
             <button type="button" className="plan-button">
-              <span className="plan-button-icon">⚡</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
               <span>{plan.buttonText}</span>
             </button>
 
@@ -130,20 +135,30 @@ export function Pricing() {
               ))}
             </ul>
 
-            {/* Corner + Button */}
+            {/* Floating Badges on Ceramic Protection Card */}
+            {plan.isHighlighted && (
+              <div className="plan-floating-badges" aria-hidden="true">
+                <div className="floating-badge badge-drive">
+                  <span className="drive-sub">Drive Confident</span>
+                  <span className="drive-main">24/7</span>
+                </div>
+                <div className="floating-badge badge-advanced">
+                  <span>Advanced Care &bull; Always On</span>
+                </div>
+                <div className="floating-badge badge-protection">
+                  <span>+ Premium</span>
+                  <span>Protection</span>
+                </div>
+                <div className="floating-badge badge-shine">
+                  <span>Longer Shine</span>
+                </div>
+              </div>
+            )}
+
+            {/* Corner + Action Button */}
             <button type="button" className="plan-plus-btn" aria-label="Add item">
               +
             </button>
-
-            {/* Badges for Ceramic Protection */}
-            {plan.badges && (
-              <div className="plan-badges-container">
-                <span className="badge badge-dark">Drive Confident 24/7</span>
-                <span className="badge badge-purple">Advanced Care • Always On</span>
-                <span className="badge badge-lime">+ Premium Protection</span>
-                <span className="badge badge-silver">Longer Shine</span>
-              </div>
-            )}
           </div>
         ))}
       </div>
@@ -152,3 +167,4 @@ export function Pricing() {
 }
 
 export default Pricing
+

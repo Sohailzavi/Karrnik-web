@@ -1,7 +1,7 @@
 const testimonials = [
   {
     id: '1',
-    quote: 'Got ceramic coating done at Karnik and the finish is outstanding. The team explained everything clearly and the final result exceeded my expectations.',
+    quote: 'Got ceramic coating done at Karrnik and the finish is outstanding. The team explained everything clearly and the final result exceeded my expectations.',
     name: 'Arjun K.',
     service: 'Ceramic Coating · Kompally',
   },
