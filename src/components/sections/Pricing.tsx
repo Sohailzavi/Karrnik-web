@@ -1,4 +1,4 @@
-﻿interface PricingPlan {
+interface PricingPlan {
   id: string
   title: string
   subtitle: string
@@ -57,6 +57,13 @@ const pricingPlans: PricingPlan[] = [
 ]
 
 export function Pricing() {
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.history.pushState(null, '', '/contact');
+    window.dispatchEvent(new Event('popstate'));
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="pricing-section" id="pricing" aria-labelledby="pricing-heading">
       <div className="pricing-header">
@@ -117,7 +124,7 @@ export function Pricing() {
               <span className="plan-unit">{plan.unit}</span>
             </div>
 
-            <button type="button" className="plan-button">
+            <button type="button" className="plan-button" onClick={handleContactClick}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
               </svg>
@@ -156,7 +163,7 @@ export function Pricing() {
             )}
 
             {/* Corner + Action Button */}
-            <button type="button" className="plan-plus-btn" aria-label="Add item">
+            <button type="button" className="plan-plus-btn" aria-label="Add item" onClick={handleContactClick}>
               +
             </button>
           </div>

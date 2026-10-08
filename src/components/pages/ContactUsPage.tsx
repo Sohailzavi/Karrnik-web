@@ -14,6 +14,8 @@ export function ContactUsPage({ onPageChange: _onPageChange }: ContactUsPageProp
   })
   const [submitted, setSubmitted] = useState(false)
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
@@ -21,33 +23,41 @@ export function ContactUsPage({ onPageChange: _onPageChange }: ContactUsPageProp
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
 
-    // Construct the email body
-    const subject = encodeURIComponent(`New Contact Query from ${formData.name}`)
-    const body = encodeURIComponent(`Name: ${formData.name}
-Mobile: ${formData.mobile}
-Car Model: ${formData.carModel || 'N/A'}
-Location: ${formData.location || 'N/A'}
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/contact@karrnik.in", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            name: formData.name,
+            phone: formData.mobile,
+            carModel: formData.carModel || 'N/A',
+            location: formData.location || 'N/A',
+            message: formData.comment,
+            _subject: `New Contact Query from ${formData.name}`,
+        })
+      });
 
-Message:
-${formData.comment}`)
-
-    // Open mailto link
-    window.location.href = `mailto:contact@karrnik.in?subject=${subject}&body=${body}`
-
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({
-        name: '',
-        mobile: '',
-        carModel: '',
-        location: '',
-        comment: '',
-      })
-    }, 4000)
+      if (response.ok) {
+        setSubmitted(true)
+        setTimeout(() => {
+          setSubmitted(false)
+          setFormData({ name: '', mobile: '', carModel: '', location: '', comment: '' })
+        }, 4000)
+      } else {
+        alert("Something went wrong. Please try again.")
+      }
+    } catch (err) {
+      alert("Network error. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -179,13 +189,15 @@ ${formData.comment}`)
               )}
 
               <div className="form-submit-row">
-                <button type="submit" className="contact-submit-btn">
-                  <span className="submit-btn-text">Contact</span>
-                  <span className="submit-btn-arrow">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 12h14M12 5l7 7-7 7" stroke="#080808" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </span>
+                <button type="submit" className="contact-submit-btn" disabled={isSubmitting}>
+                  <span className="submit-btn-text">{isSubmitting ? 'Sending...' : 'Contact'}</span>
+                  {!isSubmitting && (
+                    <span className="submit-btn-arrow">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke="#080808" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </span>
+                  )}
                 </button>
               </div>
             </form>
