@@ -134,7 +134,7 @@ export function Services() {
   return (
     <section className="services-section" id="services" aria-labelledby="services-heading">
       {/* 3-Image Gallery Banner Showcase */}
-      <div className="services-gallery-banner" aria-label="Karnik Care Showcase">
+      <div className="services-gallery-banner" aria-label="Karrnik Care Showcase">
         <div className="gallery-banner-card">
           <img src="/gallery-1.png" alt="State of the art facility" />
         </div>

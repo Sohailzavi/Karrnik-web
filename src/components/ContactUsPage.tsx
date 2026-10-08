@@ -76,7 +76,7 @@ export function ContactUsPage({ onPageChange: _onPageChange }: ContactUsPageProp
                 </div>
                 <div className="detail-text-group">
                   <span className="detail-label">Email</span>
-                  <span className="detail-value">contact@karnik.in</span>
+                  <span className="detail-value">contact@karrnik.in</span>
                 </div>
               </div>
 

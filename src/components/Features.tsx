@@ -45,7 +45,7 @@ export function Features() {
     <section className="features-section" id="features" aria-labelledby="features-title">
       <div className="features-intro">
         <h2 id="features-title" className="features-main-heading">
-          <span className="gold-heading-text">Why Karnik </span>
+          <span className="gold-heading-text">Why Karrnik </span>
           <span className="white-heading-text">Stands Out</span>
         </h2>
         <p className="features-main-desc">

@@ -15,11 +15,11 @@ export function Footer({ onPageChange }: FooterProps) {
       <div className="footer-container">
         {/* Brand Column */}
         <div className="footer-col brand-col">
-          <div className="footer-logo">
-            <span className="logo-ring">
-              <span className="inner-gold-dot" />
+          <div className="footer-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span className="brand-mark" aria-hidden="true" style={{ display: 'flex', alignItems: 'center' }}>
+              <img src="/logo.png" alt="Karrnik Logo" width="32" height="32" style={{ objectFit: 'contain' }} />
             </span>
-            <span className="logo-text-title">KARNIK</span>
+            <span className="logo-text-title" style={{ fontSize: '1.5rem', fontWeight: 600 }}>KARRNIK</span>
           </div>
           <p className="footer-tagline-sub">Premium Automotive Care & Protection</p>
 
@@ -116,7 +116,7 @@ export function Footer({ onPageChange }: FooterProps) {
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
               </span>
-              <a href="mailto:contact@karnik.in" style={{ color: 'inherit', textDecoration: 'none' }}>contact@karnik.in</a>
+              <a href="mailto:contact@karrnik.in" style={{ color: 'inherit', textDecoration: 'none' }}>contact@karrnik.in</a>
             </li>
           </ul>
         </div>

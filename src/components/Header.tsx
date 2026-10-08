@@ -25,17 +25,13 @@ export function Header({ currentPage = 'home', onPageChange }: HeaderProps) {
       <a 
         className="brand" 
         href="#home" 
-        aria-label="KARNIK home"
+        aria-label="KARRNIK home"
         onClick={(e) => handleNavClick(e, 'home')}
       >
         <span className="brand-mark" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="9.5" stroke="#dda91e" strokeWidth="2.2" />
-            <circle cx="12" cy="10.5" r="3" fill="#dda91e" />
-            <path d="M12 13.5V16.8" stroke="#dda91e" strokeWidth="2.2" strokeLinecap="round" />
-          </svg>
+          <img src="/logo.png" alt="Karrnik Logo" width="44" height="44" style={{ objectFit: 'contain' }} />
         </span>
-        <span className="brand-text">KARNIK</span>
+        <span className="brand-text">KARRNIK</span>
       </a>
 
       <nav className="desktop-nav" aria-label="Primary navigation">

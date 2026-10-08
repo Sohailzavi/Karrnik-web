@@ -4,7 +4,7 @@ export function AppBanner() {
       <div className="app-banner-image">
         <img
           src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=90"
-          alt="Premium Karnik Car Care Mobile App"
+          alt="Premium Karrnik Car Care Mobile App"
           loading="lazy"
         />
       </div>
@@ -12,7 +12,7 @@ export function AppBanner() {
       <div className="app-banner-content">
         <h3 className="app-banner-title">Premium car care, right at your fingertips.</h3>
         <p className="app-banner-subtitle">
-          Explore services, choose your location, manage your vehicle care, and stay connected with Karnik through the app.
+          Explore services, choose your location, manage your vehicle care, and stay connected with Karrnik through the app.
         </p>
 
         <div className="app-store-buttons">

@@ -103,7 +103,7 @@ export function Hero({ onPageChange }: HeroProps) {
           </div>
         </div>
 
-        {/* Floating Specular Action Button styled like Discover Karnik in About Us */}
+        {/* Floating Specular Action Button styled like Discover Karrnik in About Us */}
         <div className="hero-contact-button-wrapper">
           <SpecularButton
             size="lg"

@@ -405,7 +405,7 @@
 }
 
 
-/* Features Section - Why Karnik Stands Out */
+/* Features Section - Why Karrnik Stands Out */
 .features-section {
   padding: 4.5rem 6vw;
   background: #080808;
@@ -2745,7 +2745,7 @@
   opacity: 0.95;
 }
 
-.discover-karnik-btn {
+.discover-karrnik-btn {
   padding: 0.95rem 2.6rem;
   border-radius: 999px;
   background: linear-gradient(135deg, #e5b324 0%, #dda91e 50%, #c49212 100%);
@@ -2761,7 +2761,7 @@
   gap: 0.5rem;
 }
 
-.discover-karnik-btn:hover {
+.discover-karrnik-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 35px rgba(221, 169, 30, 0.55);
   filter: brightness(1.1);

@@ -15,7 +15,7 @@ interface LocationItem {
 const locationsData: LocationItem[] = [
   {
     id: 'kondapur',
-    name: 'Karnik Studio — Kondapur',
+    name: 'Karrnik Studio — Kondapur',
     area: 'Kondapur, Hyderabad',
     lat: 17.4640,
     lng: 78.3650,
@@ -26,7 +26,7 @@ const locationsData: LocationItem[] = [
   },
   {
     id: 'kompally',
-    name: 'Karnik Studio — Kompally',
+    name: 'Karrnik Studio — Kompally',
     area: 'Kompally, Hyderabad',
     lat: 17.5350,
     lng: 78.4850,
@@ -37,7 +37,7 @@ const locationsData: LocationItem[] = [
   },
   {
     id: 'miyapur',
-    name: 'Karnik Care Hub — Miyapur',
+    name: 'Karrnik Care Hub — Miyapur',
     area: 'Miyapur, Hyderabad',
     lat: 17.4960,
     lng: 78.3580,
@@ -48,7 +48,7 @@ const locationsData: LocationItem[] = [
   },
   {
     id: 'pashamylaram',
-    name: 'Karnik Hub — Pashamylaram',
+    name: 'Karrnik Hub — Pashamylaram',
     area: 'Pashamylaram, Hyderabad',
     lat: 17.5210,
     lng: 78.1820,
@@ -59,7 +59,7 @@ const locationsData: LocationItem[] = [
   },
   {
     id: 'gachibowli',
-    name: 'Karnik Care Hub — Gachibowli',
+    name: 'Karrnik Care Hub — Gachibowli',
     area: 'Gachibowli, Hyderabad',
     lat: 17.4400,
     lng: 78.3480,
@@ -70,7 +70,7 @@ const locationsData: LocationItem[] = [
   },
   {
     id: 'narsingi',
-    name: 'Karnik Hub — Narsingi',
+    name: 'Karrnik Hub — Narsingi',
     area: 'Narsingi, Hyderabad',
     lat: 17.3880,
     lng: 78.3680,
@@ -201,7 +201,7 @@ export function LocationsPage({ onPageChange: _onPageChange }: LocationsPageProp
         return true
       })
 
-      // Add Golden Map Pins for Karnik Studios
+      // Add Golden Map Pins for Karrnik Studios
       filtered.forEach((loc) => {
         const goldPin = L.divIcon({
           className: 'gold-studio-pin',
