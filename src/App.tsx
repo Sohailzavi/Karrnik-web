@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const handlePath = () => {
-      const path = window.location.pathname.replace(/^\/+/, '')
+      const path = window.location.pathname.replace(/^\/+/, '').replace(/\/+$/, '')
       const hash = window.location.hash.replace('#', '')
       // Some links still use hashes to scroll to sections on the homepage or our-work page
       if (path === 'our-work' || path === 'services' || hash === 'services') {
