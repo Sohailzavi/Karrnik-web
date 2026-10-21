@@ -7,13 +7,14 @@ import { OurWorkPage } from './components/pages/OurWorkPage'
 import { AboutUsPage } from './components/pages/AboutUsPage'
 import { ContactUsPage } from './components/pages/ContactUsPage'
 import { LocationsPage } from './components/pages/LocationsPage'
+import { PrivacyPolicyPage } from './components/pages/PrivacyPolicyPage'
 import { Footer } from './components/layout/Footer'
 import { AnimatedCityscape } from './components/ui/AnimatedCityscape'
 import { SplashScreen } from './components/ui/SplashScreen'
 import './App.css'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'our-work' | 'about-us' | 'locations' | 'contact'>('home')
+  const [currentPage, setCurrentPage] = useState<'home' | 'our-work' | 'about-us' | 'locations' | 'contact' | 'privacy-policy'>('home')
 
   useEffect(() => {
     const handlePath = () => {
@@ -32,6 +33,9 @@ function App() {
         setCurrentPage('about-us')
       } else if (path === 'contact') {
         setCurrentPage('contact')
+      } else if (path === 'privacy-policy' || path === 'privacy') {
+        setCurrentPage('privacy-policy')
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       } else if (path === 'locations') {
         setCurrentPage('locations')
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -63,6 +67,10 @@ function App() {
       setCurrentPage('contact')
       window.history.pushState(null, '', '/contact')
       window.scrollTo(0, 0)
+    } else if (page === 'privacy-policy' || page === 'privacy') {
+      setCurrentPage('privacy-policy')
+      window.history.pushState(null, '', '/privacy-policy')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } else if (page === 'locations' || page.startsWith('locations#')) {
       setCurrentPage('locations')
       window.history.pushState(null, '', `/locations`)
@@ -102,6 +110,8 @@ function App() {
           <LocationsPage onPageChange={handlePageChange} />
         ) : currentPage === 'contact' ? (
           <ContactUsPage onPageChange={handlePageChange} />
+        ) : currentPage === 'privacy-policy' ? (
+          <PrivacyPolicyPage onPageChange={handlePageChange} />
         ) : (
           <>
             <Hero onPageChange={handlePageChange} />
