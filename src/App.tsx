@@ -12,10 +12,8 @@ import { Footer } from './components/layout/Footer'
 import { AnimatedCityscape } from './components/ui/AnimatedCityscape'
 import { SplashScreen } from './components/ui/SplashScreen'
 import './App.css'
-
 function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'our-work' | 'about-us' | 'locations' | 'contact' | 'privacy-policy'>('home')
-
   useEffect(() => {
     const handlePath = () => {
       const path = window.location.pathname.replace(/^\/+/, '').replace(/\/+$/, '')
