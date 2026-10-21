@@ -71,6 +71,7 @@ export function Footer({ onPageChange }: FooterProps) {
               <li><a href="/#pricing" onClick={(e) => handleLinkClick(e, 'pricing')}>Offers</a></li>
               <li><a href="/#testimonials" onClick={(e) => handleLinkClick(e, 'testimonials')}>Reviews</a></li>
               <li><a href="/#faq" onClick={(e) => handleLinkClick(e, 'faq')}>FAQ</a></li>
+              <li><a href="/privacy-policy" onClick={(e) => handleLinkClick(e, 'privacy-policy')}>Privacy Policy</a></li>
             </ul>
           </div>
 
@@ -119,6 +120,22 @@ export function Footer({ onPageChange }: FooterProps) {
               <a href="mailto:contact@karrnik.in" style={{ color: 'inherit', textDecoration: 'none' }}>contact@karrnik.in</a>
             </li>
           </ul>
+        </div>
+      </div>
+
+      {/* Footer Bottom Bar */}
+      <div className="footer-bottom-bar">
+        <p className="footer-copyright">
+          © {new Date().getFullYear()} KARRNIK. All rights reserved.
+        </p>
+        <div className="footer-bottom-links">
+          <a href="/privacy-policy" onClick={(e) => handleLinkClick(e, 'privacy-policy')}>
+            Privacy Policy
+          </a>
+          <span className="footer-separator">•</span>
+          <a href="/contact" onClick={(e) => handleLinkClick(e, 'contact')}>
+            Contact Support
+          </a>
         </div>
       </div>
     </footer>
